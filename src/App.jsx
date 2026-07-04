@@ -128,11 +128,12 @@ function App() {
           <p className="section-desc">Customize your schedule, dietary rules, and kitchen targets.</p>
 
           <div className="input-group">
-            <label className="input-label">
+            <label className="input-label" htmlFor="schedule-select">
               <Calendar className="label-icon" /> Your Day's Schedule
             </label>
             <div className="select-wrapper">
               <select 
+                id="schedule-select"
                 value={dailySchedule} 
                 onChange={(e) => setDailySchedule(e.target.value)}
                 className="select-field"
@@ -147,11 +148,12 @@ function App() {
 
           <div className="grid-2-col">
             <div className="input-group">
-              <label className="input-label">
+              <label className="input-label" htmlFor="cooktime-select">
                 <Clock className="label-icon" /> Max Cook Time
               </label>
               <div className="select-wrapper">
                 <select 
+                  id="cooktime-select"
                   value={cookingTime} 
                   onChange={(e) => setCookingTime(e.target.value)}
                   className="select-field"
@@ -164,29 +166,32 @@ function App() {
             </div>
 
             <div className="input-group">
-              <label className="input-label">
+              <span className="input-label" id="servings-label">
                 <Users className="label-icon" /> Target Servings
-              </label>
-              <div className="servings-counter">
+              </span>
+              <div className="servings-counter" aria-labelledby="servings-label">
                 <button 
                   onClick={() => setServings(Math.max(1, servings - 1))}
                   className="counter-btn"
+                  aria-label="Decrease servings"
                 >-</button>
                 <span className="counter-val">{servings}</span>
                 <button 
                   onClick={() => setServings(servings + 1)}
                   className="counter-btn"
+                  aria-label="Increase servings"
                 >+</button>
               </div>
             </div>
           </div>
 
           <div className="input-group">
-            <label className="input-label">
+            <label className="input-label" htmlFor="budget-slider">
               <span className="label-icon">₹</span> Daily Budget (₹)
             </label>
             <div className="slider-container">
               <input 
+                id="budget-slider"
                 type="range" 
                 min="100" 
                 max="2500" 
@@ -194,6 +199,9 @@ function App() {
                 value={budget} 
                 onChange={(e) => setBudget(Number(e.target.value))}
                 className="slider-field"
+                aria-valuenow={budget}
+                aria-valuemin="100"
+                aria-valuemax="2500"
               />
               <div className="slider-labels">
                 <span>₹100</span>
@@ -219,16 +227,17 @@ function App() {
           </div>
 
           <div className="input-group">
-            <label className="input-label">Pantry Essentials (Avoid buying these)</label>
+            <label className="input-label" htmlFor="pantry-input-field">Pantry Essentials (Avoid buying these)</label>
             <form onSubmit={handleAddPantry} className="pantry-form">
               <input 
+                id="pantry-input-field"
                 type="text" 
                 placeholder="e.g., Rice, Soy sauce..." 
                 value={pantryInput}
                 onChange={(e) => setPantryInput(e.target.value)}
                 className="text-input"
               />
-              <button type="submit" className="add-btn">
+              <button type="submit" className="add-btn" aria-label="Add pantry item">
                 <Plus size={18} />
               </button>
             </form>
